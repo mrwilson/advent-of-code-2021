@@ -5,7 +5,7 @@ def window_of_three:
   [.[2:], .[1:], .] | transpose | .[:-2] | map(add);
 
 def drops:
-  . | pairs | map(.[0] - .[1]) | map(select(. > 0)) | length;
+  . | pairs | map(select(.[0] > .[1])) | length;
 
 def part1:
   [ .[] | tonumber ] | drops;
