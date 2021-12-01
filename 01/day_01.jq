@@ -8,8 +8,8 @@ def drops:
   . | pairs | map(select(.[0] > .[1])) | length;
 
 def part1:
-  [ .[] | tonumber ] | drops;
+  [ inputs | tonumber ] | drops;
 
 def part2:
-  [ .[] | tonumber ] | window_of_three | drops;
+  [ inputs | tonumber ] | window_of_three | drops;
 

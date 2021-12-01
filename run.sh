@@ -30,7 +30,7 @@ if [[ $TESTS_ONLY != "true" ]]; then
       --raw-input \
       -L. \
       -L${DAY} \
-      "import \"day_$DAY\" as d; \"Part ${PART} : \([inputs] | d::part${PART})\""
+      "import \"day_$DAY\" as d; \"Part ${PART} : \(d::part${PART})\""
 fi
 
 
