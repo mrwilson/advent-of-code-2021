@@ -7,8 +7,12 @@ def should_make_pairs:
 def should_count_number_of_drops:
   [1, 2, 1, 3] | day1::drops | t::assert_that( . ; t::is(2));
 
+def should_create_three_measurement_window:
+  [1, 2, 1, 3] | day1::window_of_three | t::assert_that( . ; t::is([4, 6]));
+
 def run:
   (
     should_make_pairs,
-    should_count_number_of_drops
+    should_count_number_of_drops,
+    should_create_three_measurement_window
   );
