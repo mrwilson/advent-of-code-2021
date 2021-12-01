@@ -1,8 +1,8 @@
 def pairs:
-  [.[1:], .] | transpose | .[:-1];
+  [.[1:], .[:-1] ] | transpose;
 
 def window_of_three:
-  [.[2:], .[1:], .] | transpose | .[:-2] | map(add);
+  [ .[2:], .[1:-1], .[:-2] ] | transpose | map(add);
 
 def drops:
   . | pairs | map(select(.[0] > .[1])) | length;
