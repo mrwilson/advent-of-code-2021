@@ -13,8 +13,11 @@ def parse_instruction:
 def total_displacement:
   reduce .[] as $move ([0,0] ; [.[0] + $move[0], .[1] + $move[1]]);
 
+def total_displacement_with_aim:
+  reduce .[] as $move ([0,0,0] ; [.[0] + $move[0], .[1] + (.[2] * $move[0]), .[2] + $move[1]]) | [.[0], .[1]] ;
+
 def part1:
   [ inputs | parse_instruction ] | total_displacement | .[0] * .[1];
 
 def part2:
-  [ inputs | [tonumber] | required_weights | .[1:] ] | flatten | add;
+  [ inputs | parse_instruction ] | total_displacement_with_aim | .[0] * .[1];
