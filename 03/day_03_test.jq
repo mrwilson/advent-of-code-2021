@@ -17,9 +17,21 @@ def should_parse_binary:
 def should_extract_gamma:
   [ test_input | day3::parse_binary ] | day3::gamma | t::assert_that( . ; t::is(22));
 
+def should_extract_oxygen_value:
+  [ test_input | day3::parse_binary ] | day3::oxygen | t::assert_that( . ; t::is(23));
+
+def should_extract_carbon_dioxide_value:
+  [ test_input | day3::parse_binary ] | day3::carbon_dioxide | t::assert_that( . ; t::is(10));
+
+def should_find_most_common_digit:
+  [[ test_input | day3::parse_binary ], 0] | day3::most_common_digit_in_position | t::assert_that( . ; t::is(1));
+
 def run:
     (
         should_transform_binary_to_number,
         should_parse_binary,
-        should_extract_gamma
+        should_extract_gamma,
+        should_find_most_common_digit,
+        should_extract_oxygen_value,
+        should_extract_carbon_dioxide_value
     );
