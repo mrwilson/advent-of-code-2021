@@ -58,8 +58,6 @@ def should_keep_track_of_numbers_crossed_out_on_board:
 def should_determine_a_winning_board: (
   ({ board: [["X","X","X"],[0,0,0],[0,0,0]] } | day4::is_winner | t::assert_that("horizontal win" ; . ; t::is(true))),
   ({ board: [["X",0,0],["X",0,0],["X",0,0]] } | day4::is_winner | t::assert_that("vertical win" ; . ; t::is(true))),
-  ({ board: [["X",0,0],[0,"X",0],[0,0,"X"]] } | day4::is_winner | t::assert_that("diagonal win" ; . ; t::is(true))),
-  ({ board: [[0,0,"X"],[0,"X",0],["X",0,0]] } | day4::is_winner | t::assert_that("reverse diagonal win" ; . ; t::is(true))),
   ({ board: [[0,0,0],[0,"X",0],[0,0,"X"]] }   | day4::is_winner | t::assert_that("no win" ; . ; t::is(false)))
 );
 
