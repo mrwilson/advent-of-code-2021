@@ -8,6 +8,9 @@ module {
 def assert_that($value; $matcher):
   $value | $matcher as $result | if $result.match then "ok" else "not ok # \($value) \($result.description) \($result.expected)" end;
 
+def assert_that($description; $value; $matcher):
+  $value | $matcher as $result | if $result.match then "ok # \($description)" else "not ok # \($description)\n\($value) \($result.description) \($result.expected)" end;
+
 ## Matchers
 
 def is($value):
