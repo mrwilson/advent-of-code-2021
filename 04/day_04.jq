@@ -23,3 +23,6 @@ def is_winner:
   | [$horizontal_win, $vertical_win]
   | any
   ;
+
+def score_board:
+  .board | flatten | map(select(. != "X")) | add;

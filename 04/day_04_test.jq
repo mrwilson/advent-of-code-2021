@@ -61,10 +61,14 @@ def should_determine_a_winning_board: (
   ({ board: [[0,0,0],[0,"X",0],[0,0,"X"]] }   | day4::is_winner | t::assert_that("no win" ; . ; t::is(false)))
 );
 
+def should_score_board:
+  { board: [[1,"X",3],["X","X",6],[7,"X","X"]] } | day4::score_board | t::assert_that(. ; t::is(1 + 3 + 6 + 7));
+
 def run:
     (
         should_extract_called_numbers,
         should_extract_boards,
         should_keep_track_of_numbers_crossed_out_on_board,
-        should_determine_a_winning_board
+        should_determine_a_winning_board,
+        should_score_board
     );
