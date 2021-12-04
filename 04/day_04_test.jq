@@ -65,11 +65,10 @@ def should_score_board:
   { board: [[1,"X",3],["X","X",6],[7,"X","X"]] } | day4::score_board | t::assert_that(. ; t::is(1 + 3 + 6 + 7));
 
 def should_play_bingo:
-   [ test_input ] | day4::play_bingo | t::assert_that("winning score for player 3" ; . ; t::is(188 * 24));
+   [ test_input ] | day4::play_bingo(any) | t::assert_that("winning score for player 3" ; . ; t::is(188 * 24));
 
 def should_play_bingo_to_conclusion:
-   [ test_input ] | day4::play_bingo_to_conclusion | t::assert_that("winning score for player 2 (last)" ; . ; t::is(148 * 13));
-
+   [ test_input ] | day4::play_bingo(all) | t::assert_that("winning score for player 2 (last)" ; . ; t::is(148 * 13));
 
 def run:
     (
