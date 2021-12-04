@@ -55,10 +55,18 @@ def should_keep_track_of_numbers_crossed_out_on_board:
     (day4::cross_out(4) | day4::cross_out(6) | t::assert_that( . ; has_crosses([[0,3],[1,0]])))
   );
 
+def should_determine_a_winning_board: (
+  ({ board: [["X","X","X"],[0,0,0],[0,0,0]] } | day4::is_winner | t::assert_that("horizontal win" ; . ; t::is(true))),
+  ({ board: [["X",0,0],["X",0,0],["X",0,0]] } | day4::is_winner | t::assert_that("vertical win" ; . ; t::is(true))),
+  ({ board: [["X",0,0],[0,"X",0],[0,0,"X"]] } | day4::is_winner | t::assert_that("diagonal win" ; . ; t::is(true))),
+  ({ board: [[0,0,"X"],[0,"X",0],["X",0,0]] } | day4::is_winner | t::assert_that("reverse diagonal win" ; . ; t::is(true))),
+  ({ board: [[0,0,0],[0,"X",0],[0,0,"X"]] }   | day4::is_winner | t::assert_that("no win" ; . ; t::is(false)))
+);
 
 def run:
     (
         should_extract_called_numbers,
         should_extract_boards,
-        should_keep_track_of_numbers_crossed_out_on_board
+        should_keep_track_of_numbers_crossed_out_on_board,
+        should_determine_a_winning_board
     );
