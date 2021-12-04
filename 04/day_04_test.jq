@@ -4,6 +4,9 @@ import "day_04" as day4;
 def has_nth_board($player; $board):
   { match: (.[$player].board == $board), expected: $board, description: "has board" };
 
+def has_crosses($crosses):
+  { match: (.board as $board | [ $crosses[] | $board[.[0]][.[1]]] | map(. == "X") | all), expected: $crosses[], description: "has crosses" };
+
 def test_input: (
     "7,4,9,5,11,17,23,2,0,14,21,24,10,16,13,6,15,25,12,22,18,20,8,19,3,26,1",
     "",
@@ -45,8 +48,17 @@ def should_extract_boards:
     ]))
   );
 
+def should_keep_track_of_numbers_crossed_out_on_board:
+  { board: [[1,2,3,4,5],[6,7,8,9,10]] } | (
+    (day4::cross_out(2) | t::assert_that( . ; has_crosses([[0,1]]))),
+    (day4::cross_out(9) | t::assert_that( . ; has_crosses([[1,3]]))),
+    (day4::cross_out(4) | day4::cross_out(6) | t::assert_that( . ; has_crosses([[0,3],[1,0]])))
+  );
+
+
 def run:
     (
         should_extract_called_numbers,
-        should_extract_boards
+        should_extract_boards,
+        should_keep_track_of_numbers_crossed_out_on_board
     );
