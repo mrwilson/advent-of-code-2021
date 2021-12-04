@@ -9,7 +9,7 @@ def boards:
   ))[0];
 
 def cross_out($number):
-  (.board | flatten | bsearch($number)) as $index | (
+  (.board | flatten | index($number)) as $index | (
     if $index < -1 then . else
         { board: (.board | .[$index / 5 | floor][$index % 5] = "X") }
     end
@@ -17,7 +17,6 @@ def cross_out($number):
 
 def is_winner:
   .board as $board
-  | ([.board[] | reverse]) as $flipped_board
   | (.board[0] | length) as $size
   | ([.board[] | map(select(. == "X"))] | map(length) | any(. == $size)) as $horizontal_win
   | ([.board | transpose[] | map(select(. == "X"))] | map(length) | any(. == $size))  as $vertical_win
