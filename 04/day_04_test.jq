@@ -64,11 +64,15 @@ def should_determine_a_winning_board: (
 def should_score_board:
   { board: [[1,"X",3],["X","X",6],[7,"X","X"]] } | day4::score_board | t::assert_that(. ; t::is(1 + 3 + 6 + 7));
 
+def should_play_bingo:
+   [ test_input ] | day4::play_bingo | t::assert_that("winning score for player 3" ; . ; t::is(188 * 24));
+
 def run:
     (
         should_extract_called_numbers,
         should_extract_boards,
         should_keep_track_of_numbers_crossed_out_on_board,
         should_determine_a_winning_board,
-        should_score_board
+        should_score_board,
+        should_play_bingo
     );

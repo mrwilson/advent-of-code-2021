@@ -26,3 +26,13 @@ def is_winner:
 
 def score_board:
   .board | flatten | map(select(. != "X")) | add;
+
+def play_bingo:
+  . | [ called_numbers, boards ] | until( .[1] | map(is_winner) | any  ; (
+      .[0][0] as $next_number
+      | (.[1] | map(cross_out($next_number))) as $next_boards
+      | [ .[0][1:], $next_boards, $next_number]
+  )) | .[2] as $multiplier | (.[1] | map(select(is_winner))[0] | score_board) as $score | $multiplier * $score ;
+
+def part1:
+  [inputs] | play_bingo;
