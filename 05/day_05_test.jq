@@ -23,9 +23,13 @@ def should_parse_vents_to_coordinates:
   ))),
   ("1,1 -> 2,2" | day5::vents_to_coordinates | t::assert_that("no diagonal vents"; t::is([])));
 
-
+def should_identify_duplicate_points:
+  ([[1,2], [1,2]] | day5::duplicate_points | t::assert_that("duplicate points"; t::is([[1,2]]))),
+  ([[1,2], [2,1]] | day5::duplicate_points | t::assert_that("no duplicate points"; t::is([]))),
+  ([] | day5::duplicate_points | t::assert_that("no points passed"; t::is([])));
 
 def run:
     (
-        should_parse_vents_to_coordinates
+        should_parse_vents_to_coordinates,
+        should_identify_duplicate_points
     );

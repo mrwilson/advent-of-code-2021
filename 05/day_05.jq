@@ -13,3 +13,6 @@ def vents_to_coordinates: (
       end
   );
 
+def duplicate_points:
+  . | group_by(.) | map(select(. | length > 1)) | map(.[0]) ;
+
