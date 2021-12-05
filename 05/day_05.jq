@@ -1,3 +1,6 @@
+def reverse_diagonal_multiplier:
+  if .[0][1] > .[1][1] then -1 else 1 end;
+
 def vents_to_coordinates($include_diagonals): (
   . | split("\\D"; "ig")
     | map(select(. != ""))
@@ -9,8 +12,8 @@ def vents_to_coordinates($include_diagonals): (
       elif .[0][0] == .[1][0] then
         [ . as $pairs | range(.[0][1];.[1][1]+1) | [$pairs[0][0], . ]]
       elif $include_diagonals then
-        (if .[0][1] > .[1][1] then -1 else 1 end) as $negative_if_reversed
-            | [ [range(.[0][0];.[1][0]+1) ], [ range(.[0][1];.[1][1]+$negative_if_reversed;$negative_if_reversed) ] ] | transpose
+        reverse_diagonal_multiplier as $rdm
+            | [ [range(.[0][0];.[1][0]+1) ], [ range(.[0][1];.[1][1]+$rdm;$rdm) ] ] | transpose
       else
         []
       end
