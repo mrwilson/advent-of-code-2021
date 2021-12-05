@@ -1,5 +1,7 @@
 #!/bin/bash
 
+source ./test.sh
+
 while getopts ":d:p:t" opt; do
   case ${opt} in
     d ) DAY=$(printf "%02d\n" $OPTARG) ;;
@@ -14,12 +16,8 @@ if [[ -z $DAY || ( -z $PART && -z $TESTS_ONLY ) ]]; then
 fi
 
 echo -e "### Executing tests for day ${DAY}\n"
-  jq -r \
-    --null-input \
-    --raw-input \
-    -L. \
-    -L${DAY} \
-    "import \"day_${DAY}_test\" as t; t::run"
+
+run_tests_for_day ${DAY}
 
 if [[ $TESTS_ONLY != "true" ]]; then
   echo -e "\n### Executing ${DAY}.${PART}\n"
