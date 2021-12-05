@@ -1,5 +1,5 @@
 def reverse_diagonal_multiplier:
-  if .[0][1] > .[1][1] then -1 else 1 end;
+  if .y1 > .y2 then -1 else 1 end;
 
 def vents_to_coordinates($include_diagonals): (
   . | split("\\D"; "ig")
@@ -7,13 +7,14 @@ def vents_to_coordinates($include_diagonals): (
     | map(tonumber)
     | [[.[0], .[1]],[.[2], .[3]]]
     | sort
-    | if .[0][1] == .[1][1] then
-        [ . as $pairs | range(.[0][0];.[1][0]+1) | [., $pairs[0][1] ]]
-      elif .[0][0] == .[1][0] then
-        [ . as $pairs | range(.[0][1];.[1][1]+1) | [$pairs[0][0], . ]]
-      elif $include_diagonals then
-        reverse_diagonal_multiplier as $rdm
-            | [ [range(.[0][0];.[1][0]+1) ], [ range(.[0][1];.[1][1]+$rdm;$rdm) ] ] | transpose
+    | { x1: .[0][0], y1: .[0][1], x2: .[1][0], y2: .[1][1] }
+    | if
+        .y1 == .y2 then [ . as $pairs | range(.x1;.x2+1) | [., $pairs.y1 ]]
+      elif
+        .x1 == .x2 then [ . as $pairs | range(.y1;.y2+1) | [ $pairs.x1 ,.]]
+      elif
+        $include_diagonals then reverse_diagonal_multiplier as $rdm
+            | [ [range(.x1 ; .x2 + 1) ], [ range(.y1 ;.y2 + $rdm ;$rdm) ] ] | transpose
       else
         []
       end
