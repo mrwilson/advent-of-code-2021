@@ -16,3 +16,8 @@ def vents_to_coordinates: (
 def duplicate_points:
   . | group_by(.) | map(select(. | length > 1)) | map(.[0]) ;
 
+def total_crossover_points:
+  [ .[] | vents_to_coordinates ] | flatten(1) | duplicate_points | length;
+
+def part1:
+   [ inputs ] | total_crossover_points;

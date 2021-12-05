@@ -28,8 +28,14 @@ def should_identify_duplicate_points:
   ([[1,2], [2,1]] | day5::duplicate_points | t::assert_that("no duplicate points"; t::is([]))),
   ([] | day5::duplicate_points | t::assert_that("no points passed"; t::is([])));
 
+def should_calculate_number_of_overlapping_points:
+  ( [ test_input ] | day5::total_crossover_points |
+    t::assert_that("crossover points for test input"; t::is(5))
+  );
+
 def run:
     (
         should_parse_vents_to_coordinates,
-        should_identify_duplicate_points
+        should_identify_duplicate_points,
+        should_calculate_number_of_overlapping_points
     );
