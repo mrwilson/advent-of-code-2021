@@ -1,5 +1,7 @@
 # advent-of-code-2021
 
+![Tests](https://github.com/mrwilson/advent-of-code-2021/actions/workflows/tests.yml/badge.svg)
+
 Advent of SQL was not enough. This year, it's ...
 
 👽 **Jadvent of Qode** 👽
