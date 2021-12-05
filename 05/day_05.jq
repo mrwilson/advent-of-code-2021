@@ -2,8 +2,7 @@ def reverse_diagonal_multiplier:
   if .y1 > .y2 then -1 else 1 end;
 
 def vents_to_coordinates($include_diagonals): (
-  . | split("\\D"; "ig")
-    | map(select(. != ""))
+  . | split("\\D+"; "ig")
     | map(tonumber)
     | [[.[0], .[1]],[.[2], .[3]]]
     | sort
