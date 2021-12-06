@@ -15,3 +15,6 @@ def spawn_lanternfish($days):
 
 def part1:
   inputs | spawn_lanternfish(80);
+
+def part2:
+  inputs | spawn_lanternfish(256);
