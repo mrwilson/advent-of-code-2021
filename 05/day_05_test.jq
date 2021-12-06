@@ -36,10 +36,10 @@ def should_calculate_number_of_overlapping_points_with_diagonals:
   [ test_input ] | day5::total_crossover_points(true) | t::assert_that("crossover points for test input with diagonals"; t::is(12));
 
 def run:
-    (
+    t::run_tests([
         should_parse_vents_to_coordinates,
         should_parse_vents_to_coordinates_with_diagonals,
         should_identify_duplicate_points,
         should_calculate_number_of_overlapping_points,
         should_calculate_number_of_overlapping_points_with_diagonals
-    );
+    ]);

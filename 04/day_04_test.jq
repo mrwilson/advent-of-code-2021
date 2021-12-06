@@ -71,7 +71,7 @@ def should_play_bingo_to_conclusion:
    [ test_input ] | day4::play_bingo(all) | t::assert_that("winning score for player 2 (last)" ; t::is(148 * 13));
 
 def run:
-    (
+    t::run_tests([
         should_extract_called_numbers,
         should_extract_boards,
         should_keep_track_of_numbers_crossed_out_on_board,
@@ -79,4 +79,4 @@ def run:
         should_score_board,
         should_play_bingo,
         should_play_bingo_to_conclusion
-    );
+    ]);

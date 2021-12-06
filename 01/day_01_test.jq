@@ -13,8 +13,8 @@ def should_create_three_measurement_window:
   );
 
 def run:
-  (
+  t::run_tests([
     should_make_pairs,
     should_count_number_of_drops,
     should_create_three_measurement_window
-  );
+  ]);

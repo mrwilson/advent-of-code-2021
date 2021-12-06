@@ -13,8 +13,8 @@ def should_create_list_of_require_weights_2:
   );
 
 def run:
-  (
+  t::run_tests([
     should_perform_fuel_calculation,
     should_create_list_of_require_weights_1,
     should_create_list_of_require_weights_2
-  );
+  ]);

@@ -18,8 +18,8 @@ def should_spawn_lanternfish_on_test_input:
   );
 
 def run:
-    (
+    t::run_tests([
         should_collapse_input_to_days,
         should_calculate_next_step,
         should_spawn_lanternfish_on_test_input
-    );
+    ]);

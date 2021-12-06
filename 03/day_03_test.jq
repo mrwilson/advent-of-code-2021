@@ -29,11 +29,11 @@ def should_find_most_common_digit:
   );
 
 def run:
-    (
+    t::run_tests([
         should_transform_binary_to_number,
         should_parse_binary,
         should_extract_gamma,
         should_find_most_common_digit,
         should_extract_oxygen_value,
         should_extract_carbon_dioxide_value
-    );
+    ]);

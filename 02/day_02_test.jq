@@ -15,8 +15,8 @@ def should_calculate_displacement_with_aim:
   );
 
 def run:
-    (
+    t::run_tests([
         should_parse_directions_into_coordinates,
         should_calculate_total_displacement,
         should_calculate_displacement_with_aim
-    );
+    ]);
