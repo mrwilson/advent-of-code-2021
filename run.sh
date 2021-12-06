@@ -15,8 +15,6 @@ if [[ -z $DAY || ( -z $PART && -z $TESTS_ONLY ) ]]; then
   exit 0
 fi
 
-echo -e "### Executing tests for day ${DAY}\n"
-
 run_tests_for_day ${DAY}
 
 if [[ $TESTS_ONLY != "true" ]]; then
