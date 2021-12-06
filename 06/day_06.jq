@@ -11,3 +11,7 @@ def tick: (
 
 def spawn_lanternfish($days):
   . | [$days, parse_input] | until(.[0] == 0 ; [ (.[0] - 1), (.[1] | tick) ])[1] | add;
+
+
+def part1:
+  inputs | spawn_lanternfish(80);
