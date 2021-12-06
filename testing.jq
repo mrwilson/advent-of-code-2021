@@ -11,7 +11,13 @@ def run_tests($tests):
 ## Assertions
 
 def assert_that($description; $matcher):
- (. | $matcher) as $result | if $result.match then "ok # \($description)" else "not ok # \($description)\n\(.) \($result.description) \($result.expected)" end;
+ (. | $matcher) as $result | (
+    if $result.match then
+        "ok - \($description)"
+    else
+        "not ok - \($description)\n# \(.) \($result.description) \($result.expected)"
+    end
+  );
 
 ## Matchers
 
