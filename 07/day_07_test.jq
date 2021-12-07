@@ -37,5 +37,5 @@ def run:
         should_map_to_distances_from_each_point,
         should_calculate_shortest_distance_from_points,
         should_map_to_cumulative_distances_from_each_point,
-        should_calculate_shortest_distance_from_points
+        should_calculate_cumulative_shortest_distance_from_points
     ]);
