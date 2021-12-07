@@ -21,3 +21,6 @@ def shortest_cumulative_distance_from_points:
 
 def part1:
   inputs | parse_input | shortest_distance_from_points;
+
+def part2:
+  inputs | parse_input | shortest_cumulative_distance_from_points;
