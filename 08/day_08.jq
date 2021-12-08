@@ -3,3 +3,6 @@ def parse_input:
 
 def known_digits_in_display:
   .display | map(length) | map(select(. == 2 or . == 3 or . ==4 or . == 7)) | length;
+
+def part1:
+  [ inputs | parse_input | known_digits_in_display ] | add;
