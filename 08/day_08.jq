@@ -9,21 +9,12 @@ def permutations:
 #  5
 
 def all_possible_wirings:
-  [ "abcdefg" | split("") | permutations ] | map((
-         [
-         del(.[3]),
-         [ .[2], .[6] ],
-         del(.[0,6]),
-         del(.[0,4]),
-         del(.[1,4,5]),
-         del(.[2,4]),
-         del(.[2]),
-         del(.[0,3,4,5]),
-         .,
-         del(.[4])
-         ] | map(sort | join("")
-      ) )
-    ) ;
+  [ "abcdefg" | split("") | permutations ] | (map(
+    [
+        del(.[3]), [ .[2], .[6] ], del(.[0,6]), del(.[0,4]), del(.[1,4,5]),
+        del(.[2,4]), del(.[2]), del(.[0,3,4,5]), ., del(.[4])
+    ] | map(sort | join(""))
+  )) ;
 
 def parse_input:
   split(" | ") | { digits: (.[0] | split(" ")), display: (.[1] | split(" ")) } | map_values([.[] | split("") | sort | join("")]);
