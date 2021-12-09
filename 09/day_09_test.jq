@@ -48,11 +48,17 @@ def should_find_low_points:
 def should_calculate_risk:
   [test_input] | day9::parse_input | day9::total_risk_levels | t::assert_that("total risk levels"; t::is(15));
 
+def should_find_three_largest_basins:
+  [test_input] | day9::parse_input | day9::three_largest_basins | (
+    t::assert_that("three largest basins"; t::is([9,9,14]))
+  );
+
 def run:
     t::run_tests([
         should_parse_input,
         should_get_neighbours,
         should_find_low_points,
         should_calculate_risk,
-        should_find_basin_from_low_point
+        should_find_basin_from_low_point,
+        should_find_three_largest_basins
     ]);

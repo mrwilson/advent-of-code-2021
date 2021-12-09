@@ -36,6 +36,9 @@ def basin_at($x; $y): (
   }
   )) | .basin;
 
+def three_largest_basins:
+  [low_points[] as $low | basin_at($low.x; $low.y) ] | map(length) | sort | .[-3:];
+
 def total_risk_levels:
   low_points | map(.value | .+1) | add;
 
