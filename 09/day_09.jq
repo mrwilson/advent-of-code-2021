@@ -20,6 +20,17 @@ def low_points: (
     | map(.[0])
   );
 
+def basin_at($x; $y): (
+  . as $grid
+  | { level: $grid[$x][$y], next: ($grid | neighbours($x; $y)), basin: [$grid[$x][$y]] }
+  | until(.next | length == 0; (.level as $level | .next | map(select(.value == ($level+1) and .value != 9))) as $candidates
+  | {
+    level: (.level+1),
+    next: ([ $candidates[] as $pair | $grid | neighbours($pair.x;$pair.y)] | flatten | unique),
+    basin: (.basin + ($candidates | map(.value)))
+  }
+  )) | .basin;
+
 def total_risk_levels:
   low_points | map(.+1) | add;
 

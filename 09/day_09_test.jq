@@ -30,6 +30,14 @@ def should_get_neighbours:
     )))
   );
 
+def should_find_basin_from_low_point:
+  [test_input] | day9::parse_input | (
+   (day9::basin_at(0;1) | t::assert_that("basin side"; t::is([1,2,3]))),
+   (day9::basin_at(0;9) | t::assert_that("basin corner"; t::is([0,1,1,2,2,2,3,4,4]))),
+   (day9::basin_at(2;2) | t::assert_that("basin middle"; t::is([5,6,6,7,7,7,7,8,8,8,8,8,8,8]))),
+   (day9::basin_at(4;6) | t::assert_that("basin other corner"; t::is([5,6,6,6,7,7,8,8,8])))
+);
+
 def should_find_low_points:
   [test_input] | day9::parse_input | day9::low_points | (
     t::assert_that("low points"; t::is([1,0,5,5]))
@@ -43,5 +51,6 @@ def run:
         should_parse_input,
         should_get_neighbours,
         should_find_low_points,
-        should_calculate_risk
+        should_calculate_risk,
+        should_find_basin_from_low_point
     ]);
