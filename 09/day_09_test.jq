@@ -20,8 +20,19 @@ def should_get_neighbours:
     (day9::neighbours(0;9) | t::assert_that("corner"; t::is([1,1]))),
     (day9::neighbours(2;2) | t::assert_that("middle"; t::is([6,6,8,8])))
   );
+
+def should_find_low_points:
+  [test_input] | day9::parse_input | day9::low_points | (
+    t::assert_that("low points"; t::is([1,0,5,5]))
+  );
+
+def should_calculate_risk:
+  [test_input] | day9::parse_input | day9::total_risk_levels | t::assert_that("total risk levels"; t::is(15));
+
 def run:
     t::run_tests([
         should_parse_input,
-        should_get_neighbours
+        should_get_neighbours,
+        should_find_low_points,
+        should_calculate_risk
     ]);
