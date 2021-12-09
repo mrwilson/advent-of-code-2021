@@ -24,7 +24,7 @@ def low_points: (
         neighbour_values: (neighbours($point[0]; $point[1]) | map(.value))
     })
     | map(select(.value < (.neighbour_values|min)))
-    | map({ x: .x, y: .y, value: .value})
+    | map({ x, y, value })
   );
 
 def non_boundary_neighbours($points):
