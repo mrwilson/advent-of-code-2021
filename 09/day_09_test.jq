@@ -16,9 +16,18 @@ def should_parse_input:
 
 def should_get_neighbours:
   [test_input] | day9::parse_input | (
-    (day9::neighbours(0;1) | t::assert_that("side"; t::is([2,9,9]))),
-    (day9::neighbours(0;9) | t::assert_that("corner"; t::is([1,1]))),
-    (day9::neighbours(2;2) | t::assert_that("middle"; t::is([6,6,8,8])))
+    (day9::neighbours(0;1) | t::assert_that("side"; t::is(
+        [{"x":0,"y":0,"value":2},{"x":0,"y":2,"value":9},{"x":1,"y":1,"value":9}]
+    ))),
+    (day9::neighbours(0;9) | t::assert_that("corner"; t::is(
+        [{"x":0,"y":8,"value":1},{"x":1,"y":9,"value":1}]
+    ))),
+    (day9::neighbours(2;2) | t::assert_that("middle"; t::is(
+        [{"x":2,"y":3,"value":6},{"x":3,"y":2,"value":6},{"x":2,"y":1,"value":8},{"x":1,"y":2,"value":8}]
+    ))),
+    (day9::neighbours(4;6) | t::assert_that("other side"; t::is(
+        [{"x":4,"y":5,"value":6},{"x":4,"y":7,"value":6},{"x":3,"y":6,"value":6}]
+    )))
   );
 
 def should_find_low_points:
