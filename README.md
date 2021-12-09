@@ -17,6 +17,8 @@ So, what's here?
     
 - Teeny-tiny test/matcher framework that lives in `testing.jq`. I'll probably pull this out as a separate module once AoC is over called "jamqrest"
 - `00/` is the testing spike and corresponds to Day 1 of AoC 2019
+- Utilities library in `util.jq`
+- Test runner logic in `test.sh`
 
 ```
 $ ./run.sh
