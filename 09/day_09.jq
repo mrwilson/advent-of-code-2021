@@ -1,3 +1,5 @@
+import "util" as u;
+
 def parse_input:
   map(split("") | map(tonumber));
 
@@ -25,16 +27,19 @@ def low_points: (
     | map({ x: .x, y: .y, value: .value})
   );
 
+def non_boundary_neighbours($points):
+  [ $points[] as $pair | . | neighbours($pair.x;$pair.y) | map(select(.value != 9)) ] | flatten | unique;
+
 def basin_at($x; $y): (
   . as $grid
-  | { level: $grid[$x][$y], next: ($grid | neighbours($x; $y)), basin: [$grid[$x][$y]] }
-  | until(.next | length == 0; (.level as $level | .next | map(select(.value == ($level+1) and .value != 9))) as $candidates
-  | {
-    level: (.level+1),
-    next: ([ $candidates[] as $pair | $grid | neighbours($pair.x;$pair.y)] | flatten | unique),
-    basin: (.basin + ($candidates | map(.value)))
-  }
-  )) | .basin;
+      | { next: [{ x: $x, $y, value: $grid[$x][$y]}], basin: [] }
+      | until(.next | length == 0; {
+            next: ((.next as $next | $grid | non_boundary_neighbours($next))-.basin),
+            basin: (.basin + .next) | unique
+      })
+      | .basin
+      | map(.value)
+  );
 
 def three_largest_basins:
   [low_points[] as $low | basin_at($low.x; $low.y) ] | map(length) | sort | .[-3:];
@@ -44,3 +49,6 @@ def total_risk_levels:
 
 def part1:
   [inputs] | parse_input | total_risk_levels;
+
+def part2:
+  [inputs] | parse_input | three_largest_basins | u::product;
