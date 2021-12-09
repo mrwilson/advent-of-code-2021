@@ -40,7 +40,9 @@ def should_find_basin_from_low_point:
 
 def should_find_low_points:
   [test_input] | day9::parse_input | day9::low_points | (
-    t::assert_that("low points"; t::is([1,0,5,5]))
+    t::assert_that("low points"; t::is([
+        {"x":0,"y":1,"value":1},{"x":0,"y":9,"value":0},{"x":2,"y":2,"value":5},{"x":4,"y":6,"value":5}
+    ]))
   );
 
 def should_calculate_risk:

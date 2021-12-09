@@ -15,9 +15,14 @@ def low_points: (
     (.[0] | length) as $x_length | (. | length) as $y_length | . as $grid
     | [ [range(0; $y_length)], [range(0;$x_length)] ]
     | [combinations]
-    | map(. as $point | $grid | [$grid[$point[0]][$point[1]], (neighbours($point[0]; $point[1]) | map(.value))])
-    | map(select(.[0] < (.[1]|min)))
-    | map(.[0])
+    | map(. as $point | $grid | {
+        x: $point[0],
+        y: $point[1],
+        value: $grid[$point[0]][$point[1]],
+        neighbour_values: (neighbours($point[0]; $point[1]) | map(.value))
+    })
+    | map(select(.value < (.neighbour_values|min)))
+    | map({ x: .x, y: .y, value: .value})
   );
 
 def basin_at($x; $y): (
@@ -32,7 +37,7 @@ def basin_at($x; $y): (
   )) | .basin;
 
 def total_risk_levels:
-  low_points | map(.+1) | add;
+  low_points | map(.value | .+1) | add;
 
 def part1:
   [inputs] | parse_input | total_risk_levels;
