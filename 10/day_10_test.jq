@@ -19,7 +19,17 @@ def should_parse_input:
       ["[","(","{","(","<","(","(",")",")","[","]",">","[","[","{","[","]","{","<","(",")","<",">",">"]
   )));
 
+def should_extract_corrupted_lines: (
+    ["{","(","[","(","<","{","}","[","<",">","[","]","}",">","{","[","]","{","[","(","<","(",")",">"]
+    | day10::is_corrupted
+    | t::assert_that("corrupted lines only"; t::is({
+        corrupted: true,
+        first_bad_character: "}"
+    }))
+  );
+
 def run:
     t::run_tests([
-        should_parse_input
+        should_parse_input,
+        should_extract_corrupted_lines
     ]);
