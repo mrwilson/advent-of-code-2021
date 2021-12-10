@@ -22,3 +22,11 @@ def is_corrupted: (
         { corrupted: true, first_bad_character: .remaining[0] }
       end
 );
+
+def score_corruptions: (
+  parse_input
+  | map(is_corrupted)
+  | map(select(.corrupted == true))
+  | map({")": 3,"]": 57,"}": 1197,">": 25137}[.first_bad_character])
+  | add
+);

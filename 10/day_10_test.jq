@@ -28,8 +28,12 @@ def should_extract_corrupted_lines: (
     }))
   );
 
+def should_score_corruptions:
+  [ test_input ] | day10::score_corruptions | t::assert_that("corruption score"; t::is(6+57+1197+25137));
+
 def run:
     t::run_tests([
         should_parse_input,
-        should_extract_corrupted_lines
+        should_extract_corrupted_lines,
+        should_score_corruptions
     ]);
