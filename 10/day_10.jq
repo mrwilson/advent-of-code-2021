@@ -30,3 +30,6 @@ def score_corruptions: (
   | map({")": 3,"]": 57,"}": 1197,">": 25137}[.first_bad_character])
   | add
 );
+
+def part1:
+  [ inputs ] | score_corruptions;
