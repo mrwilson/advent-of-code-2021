@@ -2,7 +2,7 @@ def parse_input:
   map(split(""));
 
 def reverse($char):
-  if $char == "]" then "[" elif $char == "}" then "{" elif $char == ")" then "(" else "<" end;
+  {"]":"[", "}":"{", ")":"(", ">":"<"}[$char];
 
 def is_corrupted: (
   def _loop:
