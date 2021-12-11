@@ -22,7 +22,15 @@ def should_parse_input: (
     )))
   );
 
+def should_test_if_any_octopodes_ready_to_flash: (
+  [ [9,0], [1,9] ]
+    | day11::flashing_octopodes
+    | t::assert_that("flashing octopodes in test input"; t::is([[0,0],[1,1]]))
+);
+
+
 def run:
     t::run_tests([
-        should_parse_input
+        should_parse_input,
+        should_test_if_any_octopodes_ready_to_flash
     ]);
