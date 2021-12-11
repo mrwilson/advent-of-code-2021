@@ -87,6 +87,11 @@ def should_count_flashes: (
     (day11::count_flashes(100) | t::assert_that("flashes after 10 ticks"; t::is(1656)))
   );
 
+def should_find_first_simultaneous_flash: (
+  [ test_input | day11::parse_input ]
+    | day11::first_simultaneous_flash
+    | t::assert_that("simultaneous flash after 195 steps"; t::is(195))
+);
 
 def run:
     t::run_tests([
@@ -95,5 +100,6 @@ def run:
         should_get_neighbouring_octopodes,
         should_tick,
         should_tick_test_input,
-        should_count_flashes
+        should_count_flashes,
+        should_find_first_simultaneous_flash
     ]);

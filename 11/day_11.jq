@@ -25,5 +25,8 @@ def count_flashes($ticks): (
   [$ticks, ., 0] | until(.[0] == 0 ; (.[1] | tick) as $next | [ (.[0]-1), $next, (.[2] + flashes($next))])[2]
 );
 
+def first_simultaneous_flash:
+   [0, .] | until(flashes(.[1]) == 100 ; (.[1] | tick) as $next | [ (.[0] + 1), $next ])[0];
+
 def part1:
   [ inputs | parse_input ] | count_flashes(100);
