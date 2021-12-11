@@ -24,6 +24,9 @@ def assert_that($description; $matcher):
 def is($value):
     { match: (. == $value), expected: $value, description: "is" };
 
+def is_sorted($value):
+    { match: (sort == ($value|sort)), expected: $value, description: "is" };
+
 def has_length($value):
     { match: ((.|length) == $value), expected: $value, description: "has length" };
 
