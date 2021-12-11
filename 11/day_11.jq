@@ -7,6 +7,9 @@ def flashing_octopodes:
 def neighbouring_octopodes($x; $y; $n):
   [1,0,-1] | [ map(.+$x), map(.+$y) ] | [ combinations | select(min >= 0 and max < $n and . != [$x, $y])];
 
+def flashes($octopodes):
+  $octopodes | flatten | map(select(. == 0)) | length;
+
 def tick: (
   length as $size |
   map(map(.+1)) |
@@ -16,4 +19,8 @@ def tick: (
      | reduce $flashes[] as $flash (. ; .[$flash[0]][$flash[1]] |= "X")
      | reduce $neighbours[] as $pair (. ; .[$pair[0][0]][$pair[0][1]] |= (if . == "X" then "X" else .+$pair[1] end))
     ) | map(map(if . == "X" then 0 else . end))
+);
+
+def count_flashes($ticks): (
+  [$ticks, ., 0] | until(.[0] == 0 ; (.[1] | tick) as $next | [ (.[0]-1), $next, (.[2] + flashes($next))])[2]
 );

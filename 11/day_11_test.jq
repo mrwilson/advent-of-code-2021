@@ -79,12 +79,21 @@ def should_tick_test_input: (
     ])))
 );
 
+def should_count_flashes: (
+  [ test_input | day11::parse_input ] |
+    (day11::count_flashes(1) | t::assert_that("flashes after 1 tick"; t::is(0))),
+    (day11::count_flashes(2) | t::assert_that("flashes after 2 ticks"; t::is(35))),
+    (day11::count_flashes(10) | t::assert_that("flashes after 10 ticks"; t::is(204))),
+    (day11::count_flashes(100) | t::assert_that("flashes after 10 ticks"; t::is(1656)))
+  );
+
 
 def run:
     t::run_tests([
         should_parse_input,
         should_test_if_any_octopodes_ready_to_flash,
-        should_get_neighbouring_octopodes
-        ,should_tick
-        ,should_tick_test_input
+        should_get_neighbouring_octopodes,
+        should_tick,
+        should_tick_test_input,
+        should_count_flashes
     ]);
