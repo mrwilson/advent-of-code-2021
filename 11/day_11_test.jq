@@ -28,9 +28,19 @@ def should_test_if_any_octopodes_ready_to_flash: (
     | t::assert_that("flashing octopodes in test input"; t::is([[0,0],[1,1]]))
 );
 
+def should_get_neighbouring_octopodes: (
+  [ test_input | day11::parse_input ] |
+    ( day11::neighbouring_octopodes(0; 0) | t::assert_that("corner"; t::is_sorted([[0,1],[1,0], [1,1]]))),
+    ( day11::neighbouring_octopodes(0; 1) | t::assert_that("side"; t::is_sorted([[0,0],[1,0], [1,1], [0,2], [1,2]]))),
+    ( day11::neighbouring_octopodes(1; 1) | t::assert_that("middle"; t::is_sorted([
+        [0,0], [0,1], [0,2], [1,0], [1,2], [2,0], [2,1], [2,2]
+    ])))
+);
+
 
 def run:
     t::run_tests([
         should_parse_input,
-        should_test_if_any_octopodes_ready_to_flash
+        should_test_if_any_octopodes_ready_to_flash,
+        should_get_neighbouring_octopodes
     ]);
