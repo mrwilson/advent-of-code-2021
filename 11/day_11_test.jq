@@ -23,9 +23,9 @@ def should_parse_input: (
   );
 
 def should_test_if_any_octopodes_ready_to_flash: (
-  [ [9,0], [1,9] ]
+  [ [9,0], [9,9] ]
     | day11::flashing_octopodes
-    | t::assert_that("flashing octopodes in test input"; t::is([[0,0],[1,1]]))
+    | t::assert_that("flashing octopodes in test input"; t::is([[0,0],[1,0],[1,1]]))
 );
 
 def should_get_neighbouring_octopodes: (
