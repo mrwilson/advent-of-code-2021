@@ -30,3 +30,6 @@ def first_simultaneous_flash:
 
 def part1:
   [ inputs | parse_input ] | count_flashes(100);
+
+def part2:
+  [ inputs | parse_input ] | first_simultaneous_flash;
