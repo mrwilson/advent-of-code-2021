@@ -1,14 +1,12 @@
 import "testing" as t;
 import "day_12" as day12;
 
-def test_input: (
-    "start-A",
-    "start-b",
-    "A-c",
-    "A-b",
-    "b-d",
-    "A-end",
-    "b-end"
+def test_input:
+  "start-A", "start-b", "A-c", "A-b", "b-d", "A-end", "b-end";
+
+def medium_test_input: (
+  "dc-end", "HN-start", "start-kj", "dc-start", "dc-HN",
+  "LN-dc", "HN-end", "kj-sa", "kj-HN", "kj-dc"
 );
 
 def should_parse_input: (
@@ -45,10 +43,16 @@ def should_traverse_caves: (
     ]))
 );
 
+def should_count_paths_without_backtracking_through_small_caves: (
+  ([ test_input ]        | day12::paths_without_backtracking | t::assert_that("small paths without backtracking"; t::is(10))),
+  ([ medium_test_input ] | day12::paths_without_backtracking | t::assert_that("medium paths without backtracking"; t::is(19)))
+);
+
 def run:
     t::run_tests([
         should_parse_input,
         should_identify_backtracking,
         should_identify_all_paths_ended,
-        should_traverse_caves
+        should_traverse_caves,
+        should_count_paths_without_backtracking_through_small_caves
     ]);

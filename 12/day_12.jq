@@ -26,3 +26,6 @@ def traverse_caves:
     end;
 
   . as $caves | [["start"]] | _descend($caves);
+
+def paths_without_backtracking:
+  parse_input | traverse_caves | length;
