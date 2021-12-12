@@ -16,15 +16,15 @@ def should_parse_input: (
 );
 
 def should_identify_backtracking: (
-  (["a", "a", "B"] | day12::no_backtracking(0) | t::assert_that("backtracking"; t::is(false))),
-  (["a", "b", "B"] | day12::no_backtracking(0) | t::assert_that("no backtracking"; t::is(true))),
-  (["a", "a", "B"] | day12::no_backtracking(1) | t::assert_that("one backtracking"; t::is(true))),
-  (["a", "a", "a"] | day12::no_backtracking(1) | t::assert_that("one backtracking only"; t::is(false)))
+  (["a", "a", "B"] | day12::no_backtracking(0) | t::assert_false("backtracking")),
+  (["a", "b", "B"] | day12::no_backtracking(0) | t::assert_true("no backtracking")),
+  (["a", "a", "B"] | day12::no_backtracking(1) | t::assert_true("one backtracking")),
+  (["a", "a", "a"] | day12::no_backtracking(1) | t::assert_false("one backtracking only"))
 );
 
 def should_identify_all_paths_ended: (
-  ([["a", "end"], ["b","end"]] | day12::all_paths_ended | t::assert_that("all paths ended"; t::is(true))),
-  ([["a", "end"], ["b","B"]]   | day12::all_paths_ended | t::assert_that("paths remaining"; t::is(false)))
+  ([["a", "end"], ["b","end"]] | day12::all_paths_ended | t::assert_true("all paths ended")),
+  ([["a", "end"], ["b","B"]]   | day12::all_paths_ended | t::assert_false("paths remaining"))
 );
 
 def should_traverse_caves: (
