@@ -1,8 +1,7 @@
 def parse_input:
   ./"" | map(tonumber);
 
-def flashing_octopodes:
-  (first|length) as $size | flatten | map(. > 9 and . != "X") | indices(true) | map([ (./$size|floor), (.%$size) ]);
+def flashing_octopodes: [paths(numbers > 9)];
 
 def neighbouring_octopodes($x; $y; $n):
   [1,0,-1] | [ map(.+$x), map(.+$y) ] | [ combinations | select(min >= 0 and max < $n and . != [$x, $y])];
