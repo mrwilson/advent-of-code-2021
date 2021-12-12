@@ -19,6 +19,9 @@ def is_sorted($value):
 def has_length($value):
     { match: ((.|length) == $value), expected: $value, description: "has length" };
 
+def has_entry($key; $value):
+    { match: (.[$key] == $value), expected: "\($key) -> \($value)", description: "has key with value" };
+
 ## Assertions
 
 def assert_that($description; $matcher):

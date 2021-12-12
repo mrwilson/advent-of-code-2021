@@ -10,9 +10,12 @@ def medium_test_input: (
 );
 
 def should_parse_input: (
-  [ test_input ] | day12::parse_input | t::assert_that("parse input"; t::is(
-    {"A":["b","end","c"],"b":["end","A","d"],"c":["A"],"d":["b"],"start":["b","A"]}
-  ))
+  [ test_input ] | day12::parse_input |
+    t::assert_that("parse input - A"; t::has_entry("A" ; ["c","b","end"])),
+    t::assert_that("parse input - b"; t::has_entry("b" ; ["A","d","end"])),
+    t::assert_that("parse input - c"; t::has_entry("c" ; ["A"])),
+    t::assert_that("parse input - d"; t::has_entry("d" ; ["b"])),
+    t::assert_that("parse input - start"; t::has_entry("start" ; ["A","b"]))
 );
 
 def should_identify_backtracking: (

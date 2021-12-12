@@ -30,7 +30,7 @@ def should_count_known_digits_in_display: (
 def should_enumerate_all_possible_wirings:
   day8::all_possible_wirings | (
     t::assert_that("has correct number of entries"; t::has_length(5040)),
-    (.[0] | t::assert_that("first permutation"; t::is([
+    t::assert_that("first permutation"; t::has_entry(0 ; [
           "abcefg",
           "cg",
           "bcdef",
@@ -41,7 +41,7 @@ def should_enumerate_all_possible_wirings:
           "bcg",
           "abcdefg",
           "abcdfg"
-        ]))
+        ])
     )
   );
 

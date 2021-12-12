@@ -22,10 +22,8 @@ def should_parse_input:
 def should_extract_corrupted_lines: (
     ["{","(","[","(","<","{","}","[","<",">","[","]","}",">","{","[","]","{","[","(","<","(",")",">"]
     | day10::is_corrupted
-    | t::assert_that("corrupted lines only"; t::is({
-        corrupted: true,
-        first_bad_character: "}"
-    }))
+    | t::assert_that("corrupted lines only"; t::has_entry("corrupted" ; true)),
+      t::assert_that("corrupted lines only - bad char"; t::has_entry("first_bad_character" ; "}"))
   );
 
 def should_score_corruptions:
