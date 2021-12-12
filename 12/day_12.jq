@@ -29,3 +29,6 @@ def traverse_caves:
 
 def paths_without_backtracking:
   parse_input | traverse_caves | length;
+
+def part1:
+  [ inputs ] | paths_without_backtracking;
