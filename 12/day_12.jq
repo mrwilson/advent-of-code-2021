@@ -2,8 +2,8 @@ def parse_input: (
   map(split("-"))
     | map([., reverse])
     | flatten(1)
-    | map(select(.[0] != "end" and .[-1] != "start"))
-    | group_by(.[0])
+    | map(select(first != "end" and last != "start"))
+    | group_by(first)
     | map({ "\(.[0][0])": map(.[1])})
     | add
 );
@@ -17,7 +17,7 @@ def no_backtracking($allowed_single_cave_repeats): (
 );
 
 def all_paths_ended:
-  map(.[-1]) | unique == ["end"];
+  map(last) | unique == ["end"];
 
 def traverse_caves($allowed_single_cave_repeats):
   def _descend($caves):
@@ -25,7 +25,7 @@ def traverse_caves($allowed_single_cave_repeats):
         .
     else
       [ .[]
-        | if .[-1] != "end" then (. as $path | $caves[$path[-1]][] | $path + [.]) else . end ]
+        | if last == "end" then . else (. as $path | $caves[$path | last][] | $path + [.]) end ]
         | map(select(no_backtracking($allowed_single_cave_repeats)))
         | _descend($caves)
     end;
