@@ -37,3 +37,6 @@ def paths_without_backtracking($allowed_single_cave_repeats):
 
 def part1:
   [ inputs ] | paths_without_backtracking(0);
+
+def part2:
+  [ inputs ] | paths_without_backtracking(1);
