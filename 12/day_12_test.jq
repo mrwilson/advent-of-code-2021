@@ -17,7 +17,9 @@ def should_parse_input: (
 
 def should_identify_backtracking: (
   (["a", "a", "B"] | day12::no_backtracking(0) | t::assert_that("backtracking"; t::is(false))),
-  (["a", "b", "B"] | day12::no_backtracking(0) | t::assert_that("no backtracking"; t::is(true)))
+  (["a", "b", "B"] | day12::no_backtracking(0) | t::assert_that("no backtracking"; t::is(true))),
+  (["a", "a", "B"] | day12::no_backtracking(1) | t::assert_that("one backtracking"; t::is(true))),
+  (["a", "a", "a"] | day12::no_backtracking(1) | t::assert_that("one backtracking only"; t::is(false)))
 );
 
 def should_identify_all_paths_ended: (
@@ -48,11 +50,17 @@ def should_count_paths_without_backtracking_through_small_caves: (
   ([ medium_test_input ] | day12::paths_without_backtracking(0) | t::assert_that("medium paths without backtracking"; t::is(19)))
 );
 
+def should_count_paths_with_one_backtrack_through_small_caves: (
+  ([ test_input ]        | day12::paths_without_backtracking(1) | t::assert_that("small paths with one backtrack"; t::is(36))),
+  ([ medium_test_input ] | day12::paths_without_backtracking(1) | t::assert_that("medium paths with one backtrack"; t::is(103)))
+);
+
 def run:
     t::run_tests([
         should_parse_input,
         should_identify_backtracking,
         should_identify_all_paths_ended,
         should_traverse_caves,
-        should_count_paths_without_backtracking_through_small_caves
+        should_count_paths_without_backtracking_through_small_caves,
+        should_count_paths_with_one_backtrack_through_small_caves
     ]);
