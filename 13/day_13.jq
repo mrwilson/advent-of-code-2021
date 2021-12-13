@@ -14,3 +14,6 @@ def fold($axis; $value):
 
 def fold_instructions($points; $folds):
   reduce $folds[] as $fold ($points ; fold($fold.axis;$fold.value) );
+
+def part1:
+  [ inputs ] | parse_input | fold_instructions(.points; [.folds|first]) | length;
