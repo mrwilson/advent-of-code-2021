@@ -1,8 +1,9 @@
 def parse_input: (
   join("#")/"##"
+   | map(split("#"))
    | {
-        points: [ first/"#" | map(./",")[] | map(tonumber) ],
-        folds:  ( last/"#" | map(./" " | last) | map(./"") | map({ axis: first, value: (last|tonumber) }))
+        points: [ first[]/"," | map(tonumber) ],
+        folds: [ last[]/" " | last/"=" | { axis: first, value: (last|tonumber) }]
     }
 );
 
