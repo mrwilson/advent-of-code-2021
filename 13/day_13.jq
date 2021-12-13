@@ -5,3 +5,9 @@ def parse_input: (
         folds:  ( last/"#" | map(./" " | last) | map(./"") | map({ axis: first, value: (last|tonumber) }))
     }
 );
+
+def flip($original; $line):
+  ($original - 2*($original/$line|floor)*($original - $line)) % line;
+
+def fold($axis; $value):
+  map({ y: [first, flip(last;$value)], x: [flip(first;$value),last]}[$axis]) | unique;
