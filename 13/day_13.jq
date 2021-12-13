@@ -16,5 +16,11 @@ def fold($axis; $value):
 def fold_instructions($points; $folds):
   reduce $folds[] as $fold ($points ; fold($fold.axis;$fold.value) );
 
+def render_image:
+  reduce .[] as $point ([]; setpath($point;"█")) | map(.//[] | map( . //  " " ) | join("")) + [""] | join("\n");
+
 def part1:
   [ inputs ] | parse_input | fold_instructions(.points; [.folds|first]) | length;
+
+def part2:
+  [ inputs ] | parse_input | fold_instructions(.points; .folds) | render_image;
