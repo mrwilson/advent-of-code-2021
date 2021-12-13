@@ -34,9 +34,16 @@ def should_fold_removing_duplicates: (
   [ [0,0], [2,0] ] | (day13::fold("x";1) | t::assert_that("fold x with dupes"; t::is_sorted([[0,0]])))
 );
 
+def should_fold_input_with_instructions: (
+  [ test_input ] | day13::parse_input
+    | (day13::fold_instructions(.points; [.folds|first]) | t::assert_that("remaining after 1 fold"; t::has_length(17))),
+      (day13::fold_instructions(.points; .folds[0:2])    | t::assert_that("remaining after 2 folds"; t::has_length(16)))
+);
+
 def run:
     t::run_tests([
         should_parse_input,
         should_fold,
-        should_fold_removing_duplicates
+        should_fold_removing_duplicates,
+        should_fold_input_with_instructions
     ]);

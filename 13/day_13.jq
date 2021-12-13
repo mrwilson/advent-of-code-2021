@@ -11,3 +11,6 @@ def flip($original; $line):
 
 def fold($axis; $value):
   map({ y: [first, flip(last;$value)], x: [flip(first;$value),last]}[$axis]) | unique;
+
+def fold_instructions($points; $folds):
+  reduce $folds[] as $fold ($points ; fold($fold.axis;$fold.value) );
