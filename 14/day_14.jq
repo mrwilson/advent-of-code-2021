@@ -11,3 +11,6 @@ def insert_pairs($steps): (
 
 def score_polymer:
   ./"" | group_by(.) | map(length) | sort | last - first;
+
+def part1:
+  [ inputs ] | parse_input | insert_pairs(10) | score_polymer;
