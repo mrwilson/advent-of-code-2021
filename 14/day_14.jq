@@ -8,3 +8,6 @@ def insert_pairs($steps): (
       | add + [$last]
   ) | join("")
 );
+
+def score_polymer:
+  ./"" | group_by(.) | map(length) | sort | last - first;

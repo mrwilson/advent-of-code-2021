@@ -33,8 +33,18 @@ def should_insert_pairs: (
     )))
 );
 
+def should_score_polymers: (
+  [ test_input ]
+    | day14::parse_input
+    | day14::insert_pairs(10)
+    | day14::score_polymer
+    | t::assert_that("score after ten steps"; t::is(1749 - 161))
+);
+
+
 def run:
     t::run_tests([
         should_parse_input,
-        should_insert_pairs
+        should_insert_pairs,
+        should_score_polymers
     ]);
