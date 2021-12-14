@@ -21,8 +21,20 @@ def should_parse_input: (
     }))
 );
 
+def should_insert_pairs: (
+  [ test_input ] | day14::parse_input |
+    (day14::insert_pairs(1) | t::assert_that("after one insertion"; t::is("NCNBCHB"))),
+    (day14::insert_pairs(2) | t::assert_that("after two insertions"; t::is("NBCCNBBBCBHCB"))),
+    (day14::insert_pairs(3) | t::assert_that("after three insertions"; t::is(
+        "NBBBCNCCNBBNBNBBCHBHHBCHB"
+    ))),
+    (day14::insert_pairs(4) | t::assert_that("after four insertions"; t::is(
+        "NBBNBNBBCCNBCNCCNBBNBBNBBBNBBNBBCBHCBHHNHCBBCBHCB"
+    )))
+);
 
 def run:
     t::run_tests([
-        should_parse_input
+        should_parse_input,
+        should_insert_pairs
     ]);
